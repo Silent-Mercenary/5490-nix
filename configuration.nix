@@ -13,16 +13,21 @@
     kernelParams = [
       "acpi_enforce_resources=lax"
       "i915.enable_dc=0"
-    ];
-  };
+      "i915.enable_guc=2"
+      "i915.enable_fbc=1"
+         "i915.enable_psr=2"
+      ];
+    };
 
       extraModprobeConfig = ''
       options snd-hda-intel model=mute-led-gpio
     '';
 
+  hardware.intelgpu.vaapiDriver = "intel-media-driver";
 
   hardware.enableRedistributableFirmware = lib.mkDefault true;
-
+  
+  services.fstrim.enable = lib.mkDefault true;
 
   hardware.bluetooth = { 
   	enable = true; # enables support for Bluetooth
@@ -32,7 +37,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.admin = {
     isNormalUser = true;
-    description = "admin";
+    description = "chris";
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" "libvirtd"];
     shell = pkgs.fish;
   };
@@ -73,17 +78,6 @@ security.doas.extraRules = [{
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";      # for Firefox
   };
-
-  # Custom Env Variables
-  environment.etc."gtk-3.0/settings.ini".text = ''
-    [Settings]
-    gtk-theme-name=Sweet-mars-v40
-  '';
-
-  environment.etc."gtk-4.0/settings.ini".text = ''
-    [Settings]
-    gtk-theme-name=Sweet-mars-v40
-  '';
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
