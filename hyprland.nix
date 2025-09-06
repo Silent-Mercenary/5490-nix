@@ -1,13 +1,12 @@
 {pkgs, ...}:
 
 {
-
   environment.systemPackages = with pkgs; [   
   aquamarine hyprlang
   hyprshot hyprpanel  
   hyprland hyprpolkitagent
   hyprkeys hyprutils 
-  hyprpanel hyprgraphics 
+  hyprgraphics fuzzel 
   hyprcursor hyprshell
   hyprland-qtutils
   hyprland-protocols
@@ -15,14 +14,12 @@
   hypridle
   hyprwayland-scanner
   hyprland-qt-support
-  nwg-dock-hyprland
-  nwg-look nwg-drawer
   notify-desktop
   wlogout wl-clipboard
   imagemagick clipse uwsm
   kanata brightnessctl
   kdePackages.gwenview
-
+  waybar eza
 
     # XDG portal
   xdg-desktop-portal

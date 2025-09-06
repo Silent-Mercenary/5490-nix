@@ -18,6 +18,7 @@
   
     # Enable sound with pipewire.
   services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -39,22 +40,14 @@
   
   
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  services.ratbagd.enable = true; # Gaming Mouse Settings 
-
-
-  
-  services.fstrim.enable = true;
-
-
-  services.davfs2 = {
-  	enable = true;
-  };
-
-  services.gnome.gnome-online-accounts = {
+  services.libinput = {
     enable = true;
   };
+
+  services.fstrim = { 
+    enable = true;
+  };
+
 
   services.tumbler = {
     enable = true; # Thumbnail support for images
@@ -83,26 +76,6 @@
 
   services.thermald = {
   	enable = true;
-  };
-
-  services.ollama = {
-  	enable = true;
-  };
-
-  services.fail2ban = {
-    enable = true;
-
-  jails = {
-    sshd.settings = {
-      enabled = true;
-      port = "22";
-      filter = "sshd";
-      logpath = "/var/log/auth.log";
-      maxretry = 5;
-      findtime = 600;
-      bantime = 86400;
-      };
-    };
   };
 
   services.openssh = {
