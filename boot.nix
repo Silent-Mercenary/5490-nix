@@ -21,8 +21,12 @@
       ];
     };
 
-   
-    
+
+    extraModprobeConfig = ''
+      options snd-hda-intel model=mute-led-gpio
+    '';
+
+      
     # Shuts up fucking systemd-initrd
     consoleLogLevel = 3;
     initrd.verbose = false;
@@ -35,6 +39,11 @@
       "intel_iommu=on"  # VM optimizations
       "iommu=pt"  # Puts devices into passthrough mode for minimal overhead
       "random.trust_cpu=on"  # Trusts CPU randomness
+      "acpi_enforce_resources=lax"
+      "i915.enable_dc=0"
+      "i915.enable_guc=2"
+      "i915.enable_fbc=1"
+      "i915.enable_psr=2"
     ];
   };
 

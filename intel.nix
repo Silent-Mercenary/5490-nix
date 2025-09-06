@@ -4,6 +4,7 @@
   services.xserver.videoDrivers = [ "modesetting" ];
 
   hardware = {
+    intelgpu.vaapiDriver = "intel-media-driver";
     graphics = {
       enable = true;
 

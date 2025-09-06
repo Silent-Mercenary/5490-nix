@@ -6,7 +6,7 @@
     package = pkgs.nixVersions.latest;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "admin" ];
+      trusted-users = [ "root" "chris" ];
       auto-optimise-store = true;
       log-lines = 50;
       http-connections = 25;

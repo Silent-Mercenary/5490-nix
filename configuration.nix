@@ -7,24 +7,6 @@
     ];
 
 
-
-    boot = {
-    # Kernel Panic on suspend fix, taken from ArchLinux wiki.
-    kernelParams = [
-      "acpi_enforce_resources=lax"
-      "i915.enable_dc=0"
-      "i915.enable_guc=2"
-      "i915.enable_fbc=1"
-         "i915.enable_psr=2"
-      ];
-    };
-
-      extraModprobeConfig = ''
-      options snd-hda-intel model=mute-led-gpio
-    '';
-
-  hardware.intelgpu.vaapiDriver = "intel-media-driver";
-
   hardware.enableRedistributableFirmware = lib.mkDefault true;
   
   services.fstrim.enable = lib.mkDefault true;
