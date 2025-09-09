@@ -4,7 +4,7 @@
   services.xserver.videoDrivers = [ "modesetting" ];
 
   hardware = {
-    intelgpu.vaapiDriver = "intel-media-driver";
+    intelgpu.vaapiDriver = "intel-media-driver";  # Driver Used for Decode
     graphics = {
       enable = true;
 
@@ -32,3 +32,8 @@
     mesa-demos
   ];
 }
+
+/*
+intel IGPU config, should have all necessary drivers to allow all functions
+well except openCL (its not installed here)
+*/

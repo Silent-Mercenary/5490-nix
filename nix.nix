@@ -1,5 +1,5 @@
 # Nix package manager, settings
-{pkgs, ... }:
+{pkgs, lib, ... }:
 
 {
   nix = {
@@ -11,8 +11,8 @@
       log-lines = 50;
       http-connections = 25;
       max-jobs = "auto";
-      cores = 12;
-      build-cores = 12;
+      cores = 8;
+      build-cores = 8;
       "download-buffer-size" = "67108864";
       warn-dirty = false;
       keep-outputs = true;
@@ -41,6 +41,7 @@
 
   # Enable firmware blob fetching
   hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
 }
 
 

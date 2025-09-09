@@ -7,13 +7,13 @@
   enable = true;
   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  localNetworkGameTransfers.openFirewall = true;
+  localNetworkGameTransfers.openFirewall = true; # Does what if fucking says on the tin
   };
 
   environment.systemPackages = with pkgs; [
   heroic steam winetricks
   wineWowPackages.unstableFull
   umu-launcher protonplus
-  lutris
+  lutris  # install bottles as a flatpak!!!
   ];
 }

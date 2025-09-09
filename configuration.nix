@@ -3,11 +3,19 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-
+    ./boot.nix
+    ./fish.nix # Fish Shell Aliases and settings (fisher not included)
+    ./game.nix # Game specific packages, (will merge into pkgs.nix)
+    ./hyprland.nix # Hyprland 
+    ./intel.nix # GPU 
+    ./pkgs.nix # System pkgs
+    ./secureboot.nix # Secure boot via Lanzaboote
+    ./services.nix # System Services
+    ./virtualization.nix # Libvirt + Service to enable virbr0
     ];
 
 
-  hardware.enableRedistributableFirmware = lib.mkDefault true;
+
   
   services.fstrim.enable = lib.mkDefault true;
 

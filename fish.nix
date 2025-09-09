@@ -15,10 +15,6 @@
     cd     = "z";
     nano   = "micro";
    
-    # Ollama
-    model-list = "ollama list"; 
-    pull-llm = "ollama pull";
-
     # Eza
     ls = "eza -al --color=always --group-directories-first --icons";
 
@@ -28,3 +24,16 @@
     };
   };
 }
+
+
+/* 
+looking for me? 
+# Fisher PM
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+# Tide - Sexier looking Fish Shell
+fisher install IlanCosman/tide@v6
+# Sponge - Doesn't save typos to History
+fisher install meaningful-ooo/sponge
+# Done - Notifications for when a long operation is done on fish
+fisher install franciscolourenco/done
+*/

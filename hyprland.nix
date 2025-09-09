@@ -37,8 +37,8 @@
     programs.hyprlock.enable = true;
 
     environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";          # for Electron apps
-    XCURSOR_THEME = "Bibata-Modern-Ice";  # or any installed theme
+    NIXOS_OZONE_WL = "1";          # for Electron apps (specifically)
+    XCURSOR_THEME = "Bibata-Modern-Ice";  # Cursor theme, found within pkgs.nix
     XCURSOR_SIZE = "24";
   };
 
@@ -53,3 +53,8 @@
     xdgOpenUsePortal = true;  # enables xdg-open via portal
   };
 }
+
+/*
+Change Theming via downloading it on pkgs.nix or shell, and then change the 
+xcursor_theme and env.etc, 
+*/
