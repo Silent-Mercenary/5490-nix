@@ -21,7 +21,7 @@ Includes
 * Lutris
 Vulkan works OOTB with very limited performance. **For Light Gaming Only**
 
-(Most you can play with dogwater settings is warframe)
+(Most you can play with dogwater settings is Warframe)
 
 ### Communication
 Includes
