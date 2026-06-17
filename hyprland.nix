@@ -1,0 +1,79 @@
+{ pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    aquamarine
+    hyprlang
+    hyprshot
+    hyprpanel
+    hyprland
+    hyprpolkitagent
+    hyprkeys
+    hyprutils
+    hyprgraphics
+    fuzzel
+    hyprcursor
+    hyprshell
+    hyprland-qtutils
+    hyprland-protocols
+    hyprsunset
+    hypridle
+    hyprwayland-scanner
+    hyprland-qt-support
+    notify-desktop
+    wlogout
+    wl-clipboard
+    imagemagick
+    clipse
+    uwsm
+    brightnessctl
+    eza
+
+    # XDG portal
+    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
+  ];
+
+  # Hyprland Fuckery
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    withUWSM = true;
+  };
+
+  programs.hyprlock.enable = true;
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1"; # for Electron apps (specifically)
+    XCURSOR_THEME = "Bibata-Modern-Ice"; # Cursor theme, found within pkgs.nix
+    XCURSOR_SIZE = "24";
+  };
+
+  xdg.portal = {
+    enable = true;
+    # Only include extra GTK portal for file pickers:
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+    xdgOpenUsePortal = true; # enables xdg-open via portal
+  };
+
+  # Custom Env Variables
+  environment.etc."gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Sweet-mars-v40
+  '';
+
+  environment.etc."gtk-4.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Sweet-mars-v40
+  '';
+
+}
+
+/*
+  Change Theming via downloading it on pkgs.nix or shell, and then change the
+  xcursor_theme and env.etc,
+*/
