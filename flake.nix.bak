@@ -1,0 +1,110 @@
+{
+  description = "NixOS configuration with SecureBoot, Copyparty, Quickshell, Noctalia, and Mango integration.";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+	mango = {
+		url = "github:mangowm/mango";
+	    inputs.nixpkgs.follows = "nixpkgs";
+	};
+    scenefx = {
+      url = "github:wlrfx/scenefx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    flake-parts,
+    scenefx,
+    lanzaboote,
+    ...
+  }:
+
+  flake-parts.lib.mkFlake { inherit inputs; } {
+
+    systems = [
+      "x86_64-linux"
+    ];
+
+    imports = [
+      inputs.flake-parts.flakeModules.easyOverlay
+    ];
+
+    flake = {
+      nixosConfigurations.nixtitude =
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          specialArgs = { inherit inputs; };
+
+          modules = [
+            ./configuration.nix
+
+            # SecureBoot
+            lanzaboote.nixosModules.lanzaboote
+            ({ pkgs, lib, ... }: {
+              environment.systemPackages = [ pkgs.sbctl ];
+
+              boot.loader.systemd-boot.enable = lib.mkForce false;
+
+              boot.lanzaboote = {
+                enable = true;
+                pkiBundle = "/var/lib/sbctl";
+              };
+            })
+
+            # Mango package from this flake
+            ({ pkgs, ... }: {
+              environment.systemPackages = [
+                pkgs.mangowc
+              ];
+            })
+          ];
+        };
+
+      hmModules.mango = import ./nix/hm-modules.nix self;
+      nixosModules.mango = import ./nix/nixos-modules.nix self;
+    };
+
+    perSystem = { config, pkgs, ... }:
+
+    let
+      inherit (pkgs) callPackage;
+
+      mango =
+        callPackage ./nix {
+          inherit (inputs.scenefx.packages.${pkgs.stdenv.hostPlatform.system}) scenefx;
+        };
+
+      shellOverride = old: {
+        nativeBuildInputs = old.nativeBuildInputs ++ [];
+        buildInputs = old.buildInputs ++ [];
+      };
+
+    in {
+
+      packages = {
+        mango = mango;
+        default = mango;
+      };
+
+      overlayAttrs = {
+        inherit (config.packages) mango;
+      };
+
+      devShells.default =
+        mango.overrideAttrs shellOverride;
+
+      formatter = pkgs.alejandra;
+    };
+  };
+}
