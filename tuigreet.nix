@@ -8,7 +8,11 @@
     };
   };
   
-  programs.regreet.enable = true;
+  services.greetd = {
+      enable = true;
+      useTextGreeter = true;
+  };
+
   
   programs.dconf.enable = true;
   services.dbus.enable = true;
