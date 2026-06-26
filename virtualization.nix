@@ -34,7 +34,15 @@
       User = "root";
     };
   };
-
+  #security.wrappers.spice-client-glib-usb-acl-helper.source = "${pkgs.spice-gtk}/bin/spice-client-glib-usb-acl-helper";
+  virtualisation.spiceUSBRedirection.enable = true;
+  security.wrappers.spice-client-glib-usb-acl-helper = {
+    source = "${pkgs.spice-gtk}/bin/spice-client-glib-usb-acl-helper";
+    owner = "root";
+    group = "root";
+    capabilities = "cap_fowner+ep";
+  };
+  
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 
 }
