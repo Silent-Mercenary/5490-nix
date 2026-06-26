@@ -15,9 +15,8 @@
     ./nix.nix
     ./xfce.nix
     ./networking.nix
-    ./mango.nix #mangowc
     ./tablet.nix
-    ./regreet.nix
+    ./tuigreet.nix
   ];
 
   nixpkgs.overlays = [
@@ -57,12 +56,6 @@
       noLog = true;
     }
   ];
-
-  # Firewall Settings per interface
-  #networking.firewall.interfaces."wlp2s0".allowedTCPPorts = [ 80 443 ];
-  #networking.firewall.interfaces."wlp2s0".allowedUDPPorts = [ ... ];
-  # networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ 22 ];
 
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1"; # for Firefox
